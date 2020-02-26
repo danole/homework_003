@@ -129,7 +129,8 @@ function task3()
     fclose($handle);
 }
 
-function task4(){
+function task4()
+{
     $url = 'https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json';
     $string = file_get_contents($url);
     $data = json_decode($string);

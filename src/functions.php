@@ -98,3 +98,35 @@ function task2()
             ", а в output2.json = ". $output2->contacts->vk . ".<br>";
     }
 }
+
+function task3()
+{
+    $numbers=[];
+
+    for($i=0;$i<=49;$i++){
+        $numbers[$i]=array(rand(1,100));
+    }
+
+    $file = fopen('file.csv','w');
+
+    foreach($numbers as $field){
+        fputcsv($file,$field, ';');
+    }
+
+    fclose($file);
+
+    $result=0;
+    $handle = fopen("file.csv", "r");
+    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+        for ($i = 0; $i < count($data); $i++) {
+            if ($data[$i]%2==0){
+                $result+=$data[$i];
+            }
+        }
+    }
+
+    echo "Сумма четных чисел в файле file.csv равна " . $result;
+    fclose($handle);
+}
+
+

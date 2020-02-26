@@ -130,7 +130,12 @@ function task3()
 }
 
 function task4(){
-    
+    $url = 'https://en.wikipedia.org/w/api.php?action=query&titles=Main%20Page&prop=revisions&rvprop=content&format=json';
+    $string = file_get_contents($url);
+    $data = json_decode($string);
+
+    echo "page_id = " . $data->query->pages->{15580374}->pageid . ";<br>";
+    echo "title = " . $data->query->pages->{15580374}->title . ";<br>";
 }
 
 

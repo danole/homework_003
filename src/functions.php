@@ -44,25 +44,26 @@ function task2()
 
     if (rand(0,1)){
         $string = file_get_contents("output.json");
-        $data = json_decode($string);
-        if (rand(0,1)) {
-            $data->name .= rand(0, 99);
+        $data = json_decode($string,true);
+
+        function recursiv($massiv)
+        {
+            foreach($massiv as $key=>$value){
+                if (!is_array($value)){
+                    $value.=rand(0,100);
+                    echo $key . " => " .$value;
+                    echo "<br>";
+                }else{
+                    recursiv($value);
+                }
+            }
         }
-        if (rand(0,1)) {
-        $data->surname.= rand(0,99);
-        }
-        if (rand(0,1)) {
-        $data->city.= rand(0,99);
-        }
-        if (rand(0,1)) {
-        $data->country.= rand(0,99);
-        }
-        if (rand(0,1)) {
-        $data->contacts->phone.= rand(0,99);
-        }
-        if (rand(0,1)) {
-        $data->contacts->vk.= rand(0,99);
-        }
+
+        recursiv($data);
+        echo "<pre>";
+
+        var_dump($data);
+
         $json = json_encode($data);
         $file = fopen('output2.json', 'w');
         fwrite($file,$json);
@@ -73,6 +74,7 @@ function task2()
     $output1=json_decode($string1);
     $string2 = file_get_contents("output2.json");
     $output2=json_decode($string2);
+
     if($output1->name!=$output2->name){
         echo "Name не совпадает. Name в output.json =" . $output1->name .
             ", а в output2.json = ". $output2->name . ".<br>";

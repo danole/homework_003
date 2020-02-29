@@ -46,23 +46,19 @@ function task2()
         $string = file_get_contents("output.json");
         $data = json_decode($string,true);
 
-        function recursiv($massiv)
+        function recursiv($array)
         {
-            foreach($massiv as $key=>$value){
-                if (!is_array($value)){
-                    $value.=rand(0,100);
-                    echo $key . " => " .$value;
-                    echo "<br>";
-                }else{
+            foreach($array as $key=>$value){
+                if (is_array($value)){
+                    echo "<h3>ARRAY=>" . $key . "</h3>";
                     recursiv($value);
+                }else{
+                    echo $key . "=>" . $value . "<br>";
                 }
             }
         }
 
         recursiv($data);
-        echo "<pre>";
-
-        var_dump($data);
 
         $json = json_encode($data);
         $file = fopen('output2.json', 'w');
